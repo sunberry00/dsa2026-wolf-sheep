@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Wolf vs Sheep</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Wolf vs Sheep</h1>
+
+    <div class="status-bar">
+        <span th:text="'Round: ' + ${round}">Round: 0</span> |
+        <span th:text="${isWolfTurn} ? 'Turn: WOLF' : 'Turn: SHEEP'"
+              th:class="${isWolfTurn} ? 'turn-wolf' : 'turn-sheep'">Turn: ???</span>
+    </div>
+
+    <div class="message" th:if="${message}" th:text="${message}"></div>
+
+    <div class="board">
+        <svg class="lines" width="600" height="300">
+            <line x1="45" y1="175" x2="165" y2="75"/>
+            <line x1="45" y1="175" x2="165" y2="175"/>
+            <line x1="45" y1="175" x2="165" y2="275"/>
+            <line x1="165" y1="75" x2="165" y2="175"/>
+            <line x1="165" y1="175" x2="165" y2="275"/>
+            <line x1="165" y1="75" x2="285" y2="175"/>
+            <line x1="165" y1="175" x2="285" y2="175"/>
+            <line x1="165" y1="275" x2="285" y2="175"/>
+            <line x1="285" y1="50" x2="285" y2="175"/>
+            <line x1="285" y1="250" x2="285" y2="175"/>
+            <line x1="405" y1="75" x2="285" y2="175"/>
+            <line x1="405" y1="175" x2="285" y2="175"/>
+            <line x1="405" y1="275" x2="285" y2="175"/>
+            <line x1="165" y1="75" x2="285" y2="75"/>
+            <line x1="285" y1="75" x2="405" y2="75"/>
+            <line x1="165" y1="275" x2="285" y2="275"/>
+            <line x1="285" y1="275" x2="405" y2="275"/>
+            <line x1="405" y1="75" x2="405" y2="175"/>
+            <line x1="405" y1="175" x2="405" y2="275"/>
+            <line x1="525" y1="175" x2="405" y2="75"/>
+            <line x1="525" y1="175" x2="405" y2="175"/>
+            <line x1="525" y1="175" x2="405" y2="275"/>
+        </svg>
+
+        <form method="post" action="/move">
+
+            <button name="target" value="0" class="node node-0"
+                    th:classappend="${wolfPos == 0} ? 'wolf' :
+                       (${sheepPos.contains(0)} ? 'sheep ' + (${selectedSheep == 0} ? 'selected' : '') : '')">
+                0
+            </button>
+
+            <button name="target" value="1" class="node node-1"
+                    th:classappend="${wolfPos == 1} ? 'wolf' :
+                       (${sheepPos.contains(1)} ? 'sheep ' + (${selectedSheep == 1} ? 'selected' : '') : '')">
+                1
+            </button>
+
+            <button name="target" value="2" class="node node-2"
+                    th:classappend="${wolfPos == 2} ? 'wolf' :
+                       (${sheepPos.contains(2)} ? 'sheep ' + (${selectedSheep == 2} ? 'selected' : '') : '')">
+                2
+            </button>
+
+            <button name="target" value="3" class="node node-3"
+                    th:classappend="${wolfPos == 3} ? 'wolf' :
+                       (${sheepPos.contains(3)} ? 'sheep ' + (${selectedSheep == 3} ? 'selected' : '') : '')">
+                3
+            </button>
+
+            <button name="target" value="4" class="node node-4"
+                    th:classappend="${wolfPos == 4} ? 'wolf' :
+                       (${sheepPos.contains(4)} ? 'sheep ' + (${selectedSheep == 4} ? 'selected' : '') : '')">
+                4
+            </button>
+
+            <button name="target" value="5" class="node node-5"
+                    th:classappend="${wolfPos == 5} ? 'wolf' :
+                       (${sheepPos.contains(5)} ? 'sheep ' + (${selectedSheep == 5} ? 'selected' : '') : '')">
+                5
+            </button>
+
+            <button name="target" value="6" class="node node-6"
+                    th:classappend="${wolfPos == 6} ? 'wolf' :
+                       (${sheepPos.contains(6)} ? 'sheep ' + (${selectedSheep == 6} ? 'selected' : '') : '')">
+                6
+            </button>
+
+            <button name="target" value="7" class="node node-7"
+                    th:classappend="${wolfPos == 7} ? 'wolf' :
+                       (${sheepPos.contains(7)} ? 'sheep ' + (${selectedSheep == 7} ? 'selected' : '') : '')">
+                7
+            </button>
+
+            <button name="target" value="8" class="node node-8"
+                    th:classappend="${wolfPos == 8} ? 'wolf' :
+                       (${sheepPos.contains(8)} ? 'sheep ' + (${selectedSheep == 8} ? 'selected' : '') : '')">
+                8
+            </button>
+
+            <button name="target" value="9" class="node node-9"
+                    th:classappend="${wolfPos == 9} ? 'wolf' :
+                       (${sheepPos.contains(9)} ? 'sheep ' + (${selectedSheep == 9} ? 'selected' : '') : '')">
+                9
+            </button>
+
+            <button name="target" value="10" class="node node-10"
+                    th:classappend="${wolfPos == 10} ? 'wolf' :
+                       (${sheepPos.contains(10)} ? 'sheep ' + (${selectedSheep == 10} ? 'selected' : '') : '')">
+                10
+            </button>
+        </form>
+    </div>
+
+    <form action="/reset" method="post">
+        <button type="submit" class="reset-btn">New Game</button>
+    </form>
+
+    <div class="instructions">
+        <p><strong>Wolf:</strong> Click an empty neighbor to move.</p>
+        <p><strong>Sheep:</strong> Click a sheep to select it, then click an empty neighbor to move.</p>
+    </div>
+</div>
+
+</body>
+</html>
