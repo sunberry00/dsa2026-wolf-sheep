@@ -22,6 +22,14 @@ public class WebController {
         return "game";
     }
 
+    @PostMapping("/start")
+    public String startGame(@RequestParam("mode") String mode) {
+        gameEngine.resetGame();
+        gameEngine.setGameMode(mode);
+        selectedSheepStart = null;
+        return "redirect:/";
+    }
+
     @PostMapping("/move")
     public String move(@RequestParam("target") int target, Model model) {
         GameState state = gameEngine.getGameState();
@@ -50,6 +58,10 @@ public class WebController {
             }
         }
 
+        if (!state.isGameOver() && !message.startsWith("Invalid") && !message.equals("Select a sheep.") && !message.equals("Changed selection.")) {
+            message += gameEngine.playBotTurn();
+        }
+
         updateModel(model, message);
         return "game";
     }
@@ -70,5 +82,6 @@ public class WebController {
         model.addAttribute("message", message);
         model.addAttribute("selectedSheep", selectedSheepStart);
         model.addAttribute("winner", state.getWinner());
+        model.addAttribute("mode", gameEngine.getCurrentMode());
     }
 }

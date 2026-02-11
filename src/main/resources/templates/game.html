@@ -17,6 +17,20 @@
 
     <div class="message" th:if="${message}" th:text="${message}"></div>
 
+    <div class="controls" style="margin-top: 20px; background: #444; padding: 10px; border-radius: 5px;">
+        <p style="margin-bottom: 5px;">Current Mode: <strong th:text="${mode}">PvP</strong></p>
+
+        <form action="/start" method="post">
+            <select name="mode" style="padding: 8px; font-size: 16px;">
+                <option value="PvP">Player vs Player</option>
+                <option value="PlayerVsWolfBot">Player (Sheep) vs Bot (Wolf)</option>
+                <option value="SheepBotVsPlayer">Bot (Sheep) vs Player (Wolf)</option>
+                <option value="BotVsBot">Bot vs Bot</option>
+            </select>
+            <button type="submit" class="reset-btn" style="margin-top: 0; margin-left: 10px;">Restart in Mode</button>
+        </form>
+    </div>
+
     <div class="board">
         <svg class="lines" width="600" height="300">
             <line x1="45" y1="175" x2="165" y2="75"/>
